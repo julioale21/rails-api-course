@@ -27,7 +27,11 @@ module RailsCourseApi
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resources '*', headers: :any, methods: [:get :post :put :patch :delete :options :head]
+        resources (
+          '*', 
+          headers: :any, 
+          methods: [:get :post :put :patch :delete :options :head]
+        )
       end
     end
   end
