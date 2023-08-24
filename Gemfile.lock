@@ -152,6 +152,10 @@ GEM
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    simple_token_authentication (1.18.1)
+      actionmailer (>= 3.2.6, < 8)
+      actionpack (>= 3.2.6, < 8)
+      devise (>= 3.2, < 6)
     thor (1.2.2)
     timeout (0.4.0)
     tzinfo (2.0.6)
@@ -175,6 +179,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.7)
+  simple_token_authentication (~> 1.0)
   tzinfo-data
 
 RUBY VERSION
