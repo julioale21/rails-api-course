@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -12,12 +14,14 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
-gem 'devise'
+gem "devise"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem 'friendly_id', '~> 5.4.0'
+gem "friendly_id", "~> 5.4.0"
+
+gem "rubocop", require: false
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -29,10 +33,10 @@ gem 'friendly_id', '~> 5.4.0'
 gem "bcrypt", "~> 3.1.7"
 # Gemfile
 
-gem 'simple_token_authentication', '~> 1.0' # see semver.org
+gem "simple_token_authentication", "~> 1.0" # see semver.org
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -44,11 +48,10 @@ gem "bootsnap", require: false
 gem "rack-cors"
 
 group :development, :test do
-  gem 'byebug'
+  gem "byebug"
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-

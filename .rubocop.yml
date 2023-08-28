@@ -1,0 +1,22 @@
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
+    - 'config/**/*'
+    - 'spec/**/*'
+    - 'vendor/**/*'
+    - 'lib/tasks/auto_annotate_models.rake'
+  TargetRailsVersion: 5.1
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/FrozenStringLiteralComment:
+  Enabled: true
+Layout/TrailingEmptyLines:
+  EnforcedStyle: final_newline
+Layout/LeadingCommentSpace:
+  Enabled: true
+  EnforcedStyle: space

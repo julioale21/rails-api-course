@@ -1,33 +1,35 @@
+# frozen_string_literal: true
+
 class V1::ContactsController < ApplicationController
-    def index
-        @contacts = current_user.contacts
+  def index
+    @contacts = current_user.contacts
 
-        render :index, status: :ok
+    render :index, status: :ok
+  end
+
+  def create
+    @contact = current_user.contacts.build(contact_params)
+
+    if @contact.save
+      render :create, status: :created
+    else
+      render json: @contact.errors, status: :unprocessable_entity
     end
+  end
 
-    def create
-        @contact = current_user.contacts.build(contact_params) 
+  def destroy
+    @contact = current_user.contacts.where(id: params[:id]).first
 
-        if @contact.save
-            render :create, status: :created
-        else
-            render json: @contact.errors, status: :unprocessable_entity
-        end
+    if @contact.destroy
+      head(:ok)
+    else
+      head(:unprocessable_entity)
     end
+  end
 
-    def destroy
-        @contact = current_user.contacts.where(id: params[:id]).first
+  private
 
-        if @contact.destroy
-            head(:ok)
-        else
-            head(:unprocessable_entity)
-        end
-    end
-
-    private
-
-    def contact_params
-        params.require(:contact).permit(:first_name, :last_name, :email)
-    end
+  def contact_params
+    params.require(:contact).permit(:first_name, :last_name, :email)
+  end
 end
