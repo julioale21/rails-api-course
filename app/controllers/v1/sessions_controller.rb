@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Sessions controller
 class V1::SessionsController < ApplicationController
   def show
     current_user ? head(:ok) : head(:unauthorized)

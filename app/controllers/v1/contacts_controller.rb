@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Contacts controller
 class V1::ContactsController < ApplicationController
   def index
     @contacts = current_user.contacts
