@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-# Contacts controller
+# Contacts endpoints
 class V1::ContactsController < ApplicationController
   def index
-    @contacts = current_user.contacts
+    @contacts = account.contacts
 
     render :index, status: :ok
   end
 
   def create
-    @contact = current_user.contacts.build(contact_params)
+    @contact = organization.contacts.build(contact_params)
 
     if @contact.save
       render :create, status: :created
     else
-      render json: @contact.errors, status: :unprocessable_entity
+      head(:unprocessable_entity)
     end
   end
 
   def destroy
-    @contact = current_user.contacts.where(id: params[:id]).first
+    @contact = organization.contacts.find(params[:id])
 
     if @contact.destroy
       head(:ok)
@@ -28,7 +28,25 @@ class V1::ContactsController < ApplicationController
     end
   end
 
+  def update
+     @contact = organization.contacts.find(params[:id])
+
+     if @contact.update(contact_params)
+      render :update, status: :ok
+     else
+      head(:unprocessable_entity)
+     end
+  end
+
   private
+
+  def organization
+    @organization ||= account.organizations.friendly.find(params[:organization_id]) 
+  end
+
+  def account
+    @account ||= Account.friendly.find(params[:account_id])
+  end
 
   def contact_params
     params.require(:contact).permit(:first_name, :last_name, :email)

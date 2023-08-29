@@ -1,11 +1,19 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
   namespace :v1, defaults: { format: :json } do
-    resources :accounts, only: [:create, :update] do
-      resources :contacts
+    scope ':account_id' do
+      resources :contacts, only: %i[index]
+
+      resources :organizations, only: %i[create update] do
+        resources :contacts, only: %i[create update destroy]
+      end
     end
+
+    resources :accounts, only: %i[create, update] 
     
-    resource :sessions, only: [:create, :destroy]
-    resources :users, only: [:create]
+    resource :sessions, only: %i[create destroy show]
+    resources :users, only: %i[create]
   end
 end
