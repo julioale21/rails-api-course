@@ -2,6 +2,13 @@
 
 # Accounts controller
 class V1::AccountsController < ApplicationController
+
+  def index 
+    accounts = current_user.accounts
+
+    render :index, locals: { accounts: accounts }
+  end
+
   def create
     account = current_user.accounts.build(account_params)
 
