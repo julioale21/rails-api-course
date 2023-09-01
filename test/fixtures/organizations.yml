@@ -1,0 +1,7 @@
+one:
+  name: <%= Faker::Company.name %>
+  account: moonshot
+
+two:
+  name: <%= Faker::Company.name %>
+  account: another_account

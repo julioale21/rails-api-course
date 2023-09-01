@@ -50,6 +50,7 @@ gem "rack-cors"
 group :development, :test do
   gem "byebug"
   gem "faker"
+  gem 'pry', '~> 0.14.2'
 end
 
 group :development do

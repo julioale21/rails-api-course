@@ -9,3 +9,7 @@ one:
   authentication_token: "faketoken"
   confirmed_at: <%= Time.now %>
 
+two: 
+  email: <%= Faker::Internet.email %>
+  authentication_token: "faketokenusertwo"
+  confirmed_at: <%= Time.now %>

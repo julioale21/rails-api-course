@@ -1,0 +1,9 @@
+moonshot:
+  name: "Moonshot"
+  slug: "moonshot-company"
+  owner: one
+
+another_account:
+  name: <%= Faker::Company.name %>
+  slug: "another-account"
+  owner: two
