@@ -29,19 +29,19 @@ class V1::ContactsController < ApplicationController
   end
 
   def update
-     @contact = organization.contacts.find(params[:id])
+    @contact = organization.contacts.find(params[:id])
 
-     if @contact.update(contact_params)
+    if @contact.update(contact_params)
       render :update, status: :ok
-     else
+    else
       head(:unprocessable_entity)
-     end
+    end
   end
 
   private
 
   def organization
-    @organization ||= account.organizations.friendly.find(params[:organization_id]) 
+    @organization ||= account.organizations.friendly.find(params[:organization_id])
   end
 
   def account

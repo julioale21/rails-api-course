@@ -49,7 +49,7 @@ gem "rack-cors"
 
 group :development, :test do
   gem "byebug"
-  gem 'faker'
+  gem "faker"
 end
 
 group :development do
