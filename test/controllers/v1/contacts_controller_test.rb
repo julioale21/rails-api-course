@@ -3,7 +3,7 @@
 require "test_helper"
 
 class V1::ContactsControllerTest < ActionDispatch::IntegrationTest
-  test 'should get only contacts for moonshot' do
+  test "should get only contacts for moonshot" do
     account = accounts(:moonshot)
 
     not_moonshot_contact = contacts(:two)
@@ -17,10 +17,9 @@ class V1::ContactsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_not_includes contacts_ids, not_moonshot_contact.id
-
   end
 
-  test 'should create contact under the correct org' do
+  test "should create contact under the correct org" do
     account = accounts(:moonshot)
     organization = account.organizations.first
 
@@ -29,10 +28,10 @@ class V1::ContactsControllerTest < ActionDispatch::IntegrationTest
 
     post(
       v1_organization_contacts_path(
-        account_id: account.id, 
+        account_id: account.id,
         organization_id: organization.id
-      ), 
-      params: { 
+      ),
+      params: {
         contact: { first_name: first_name, last_name: last_name }
       }
     )

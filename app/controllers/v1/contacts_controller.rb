@@ -2,6 +2,8 @@
 
 # Contacts endpoints
 class V1::ContactsController < ApplicationController
+  include V1::Contacts::Response
+
   def index
     @contacts = account.contacts
 
@@ -11,31 +13,20 @@ class V1::ContactsController < ApplicationController
   def create
     @contact = organization.contacts.build(contact_params)
 
-    if @contact.save
-      render :create, status: :created
-    else
-      head(:unprocessable_entity)
-    end
+    create_and_render_contact(@contact) || render_invalid_response
   end
 
   def destroy
-    @contact = organization.contacts.find(params[:id])
+    contact = organization.contacts.find(params[:id])
 
-    if @contact.destroy
-      head(:ok)
-    else
-      head(:unprocessable_entity)
-    end
+    destroy_and_render_contact(contact) || render_invalid_response
   end
 
   def update
-    @contact = organization.contacts.find(params[:id])
+    contact = organization.contacts.find(params[:id])
 
-    if @contact.update(contact_params)
-      render :update, status: :ok
-    else
-      head(:unprocessable_entity)
-    end
+    update_and_render_contact(contact, contact_params) || 
+      render_invalid_response
   end
 
   private
