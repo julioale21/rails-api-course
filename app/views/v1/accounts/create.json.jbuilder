@@ -2,6 +2,9 @@
 
 json.data do
   json.account do
-    json.call(@account, :id, :name)
+    json.partial!(
+      'v1/accounts/account',
+      account: account
+    )
   end
 end
