@@ -5,7 +5,7 @@ class V1::ContactsController < ApplicationController
   include V1::Contacts::Response
 
   def index
-    @contacts = account.contacts
+    @contacts = current_account.contacts
 
     render :index, status: :ok
   end
@@ -25,18 +25,14 @@ class V1::ContactsController < ApplicationController
   def update
     contact = organization.contacts.find(params[:id])
 
-    update_and_render_contact(contact, contact_params) || 
+    update_and_render_contact(contact, contact_params) ||
       render_invalid_response
   end
 
   private
 
   def organization
-    @organization ||= account.organizations.find(params[:organization_id])
-  end
-
-  def account
-    @account ||= Account.find(params[:account_id])
+    @organization ||= current_account.organizations.find(params[:organization_id])
   end
 
   def contact_params

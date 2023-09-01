@@ -2,8 +2,7 @@
 
 # Accounts controller
 class V1::AccountsController < ApplicationController
-
-  def index 
+  def index
     accounts = current_user.accounts
 
     render :index, locals: { accounts: accounts }

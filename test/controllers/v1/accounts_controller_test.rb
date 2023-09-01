@@ -10,7 +10,7 @@ class V1::AccountControllerTest < ActionDispatch::IntegrationTest
     }
   end
 
-  test "should access user accounts" do 
+  test "should access user accounts" do
     no_user_one_account = accounts(:another_account)
 
     get(
@@ -45,5 +45,4 @@ class V1::AccountControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert account["name"] == account_params[:name]
   end
-
 end
