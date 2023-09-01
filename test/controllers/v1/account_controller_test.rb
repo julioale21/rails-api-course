@@ -24,6 +24,10 @@ class V1::AccountControllerTest < ActionDispatch::IntegrationTest
       headers: @headers,
       params: { account: account_params }
     )
+
+    account = JSON.parse(response.body)['data']['account']
+
     assert_response :success
+    assert account['name'] == account_params[:name]
   end
 end
