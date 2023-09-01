@@ -41,11 +41,11 @@ class V1::ContactsController < ApplicationController
   private
 
   def organization
-    @organization ||= account.organizations.friendly.find(params[:organization_id])
+    @organization ||= account.organizations.find(params[:organization_id])
   end
 
   def account
-    @account ||= Account.friendly.find(params[:account_id])
+    @account ||= Account.find(params[:account_id])
   end
 
   def contact_params
