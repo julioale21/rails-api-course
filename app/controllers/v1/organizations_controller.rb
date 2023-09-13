@@ -2,6 +2,12 @@
 
 # Organization controller
 class V1::OrganizationsController < ApplicationController
+  def index 
+    organizations = current_account.organizations
+
+    render :index, locals: { organizations: organizations }, status: :ok
+  end
+
   def create
     organization = current_account.organizations.build(organization_params)
 

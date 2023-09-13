@@ -14,6 +14,22 @@ class V1::OrganizationsControllerTest < ActionDispatch::IntegrationTest
     }
   end
 
+  test "list out organizations for account" do
+    org_one = organizations(:one)
+    org_two = organizations(:two)
+
+    get v1_organizations_path(account_id: @current_account.id), headers: @headers
+
+    organizations_ids = JSON.parse(@response.body)['data'].map do |org|
+      org['id']
+    end
+
+    assert_response :success
+    assert_includes organizations_ids, org_one.id
+    assert_not_includes organizations_ids, org_two.id
+
+  end
+
   test "create an organization" do
 
     organization_params = {
@@ -35,4 +51,21 @@ class V1::OrganizationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :created
     assert organization["name"] == organization_params[:name]
   end
+
+  test 'should return unprocesable entity' do 
+    organization_params = {
+      name: Faker::Company.name,
+      tax_payer_number: '',
+      address: '',
+    }
+
+    post(
+      v1_organizations_path(account_id: @current_account.id),
+      headers: @headers,
+      params: { organization: organization_params}
+    )
+
+    assert_response :unprocessable_entity
+  end
+
 end
